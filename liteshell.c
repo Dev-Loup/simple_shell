@@ -18,7 +18,7 @@ int main(int ac, char **av, char **env)
 	pid_t pid1;
 
 	path = finds_path(env);
-	pathoken = _strtok(path);
+	pathoken = tokenizer(path);
 	while (_strcmp(line, SH_KILLER) != 0)
 	{
 		location = malloc(256 * sizeof(char));
@@ -35,7 +35,7 @@ int main(int ac, char **av, char **env)
 			cmdcounter++;
 			if (line == "." || line == "\n" || line == "\t" || line == " ")
 				continue;
-			line_tk = _strtok(line);
+			line_tk = tokenizer(line);
 			ret_wa = is_address(line_tk[0]);
 			if (ret_wa != 0)
 			{

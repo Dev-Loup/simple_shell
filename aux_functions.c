@@ -10,6 +10,9 @@ int _strcmp(char *s1, char *s2)
 {
 	int long_of_dest;
 
+	if (!s1 || !s2)
+		return(1);
+
 	for (long_of_dest = 0; s1[long_of_dest] != '\0'; long_of_dest++)
 	{
 		if (s1[long_of_dest] != s2[long_of_dest])
