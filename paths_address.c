@@ -6,14 +6,14 @@
  **/
 int is_address(char *cmd)
 {
-  int fd;
+	int fd;
 
-  fd = open(argv0 ,O_RDONLY);
-  if (fd == 3)
-    {
-      close(fd);
-      return(0);
-    }
-  close(fd);
-  return (-1);
+	fd = open(cmd ,O_RDONLY);
+	if (fd == 3)
+	{
+		close(fd);
+		return(0);
+	}
+	close(fd);
+	return (-1);
 }

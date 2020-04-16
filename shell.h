@@ -15,14 +15,15 @@
 #include <fcntl.h>
 
 char *finds_path(char **env);
-int str_cmp_first_chars(char *variable,);
+int str_cmp_first_chars(char *variable);
 char *_strcat(char *dest, char *src);
-char* matcher(char *command, char* directory);
+char* match_path(char *command, char* directory);
 char** _strtok(char *av);
-int com_c(char av, char delimiter[]);
+int com_c(char av);
 int _strcmp(char *s1, char *s2);
 int works_as_address(char *argv0, char **argv, char *env[]);
 void control_c(int sig);
 void sig_handler(int signal);
+char *_strdup(char *str);
 
 #endif

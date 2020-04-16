@@ -1,24 +1,14 @@
 #include "shell.h"
 
-char *_strcat(char *dest, char *src)
-{
-	int i, j;
-
-	for (i = 0; dest[i] != '\0'; i++)
-	{
-	}
-	for (j = 0; src[j] != '\0'; j++)
-		dest[i + j] = src[j];
-	dest[i + j] = '\0';
-	return (dest);
-}
-char* matcher(char *command, char* directory)
+char *match_path(char *command, char *pathokeni)
 {
 	struct dirent *pDirent;
 	DIR *pDir;
-	char* path;
-	char* slash = "/";
+	char *path;
+	char *slash = "/";
+	char *directory;
 
+	directory = _strdup(pathokeni);
 	pDir = opendir(directory);
 	if (pDir == NULL)
 	{
@@ -27,7 +17,7 @@ char* matcher(char *command, char* directory)
 	}
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
-		if (strcmp(command, pDirent->d_name) == 0)
+		if (_strcmp(command, pDirent->d_name) == 0)
 		{
 			path = pDirent->d_name;
 			printf("path: %s\n", path);
@@ -39,6 +29,6 @@ char* matcher(char *command, char* directory)
 		}
 	}
 	closedir (pDir);
-	directory = NULL;
-	return (directory);
+	free(directory);
+	return (NULL);
 }
