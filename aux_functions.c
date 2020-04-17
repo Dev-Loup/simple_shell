@@ -10,7 +10,7 @@ int _strcmp(char *s1, char *s2)
 {
 	int long_of_dest;
 
-	if (s1 == NULL)
+	if (s1 == NULL || s2 == NULL)
 		return (1);
 
 	if (_strlen(s1) != _strlen(s2))

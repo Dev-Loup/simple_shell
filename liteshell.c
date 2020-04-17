@@ -40,7 +40,7 @@ int main(int ac, char **av, char **env)
 			printf("path tokenized\n");
 			location = cat_cmd(cmd[0], dirs, &head);
 			printf("loc: %s\n", location);
-			if (location == "sh")
+			if (_strcmp(location, "sh") == 0)
 				continue;
 			if (location == NULL && (_strcmp(DELIMITER, line) == 0))
 				continue;
@@ -53,6 +53,7 @@ int main(int ac, char **av, char **env)
 			if (pid == 0)
 			{
 				execve(location, cmd, env);
+				exit(0);
 			}
 			wait(NULL);
 		}
