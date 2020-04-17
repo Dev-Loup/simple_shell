@@ -1,37 +1,18 @@
 #include "shell.h"
 
-/**
- * str_cmp_first_chars - look for path variable
- * @variable: environment variable
- * Return: 0 on Success, 1 if it fails
- **/
-int str_cmp_first_chars(char *variable)
+
+char *path_finder(char *env[], garbage **head)
 {
-	char path[] = "PATH";
-	int i = 4, j = 0;
-
-	for(j = 0; path[j]; j++)
-	{
-		if(variable[j] != path[j])
-			return(1);
-	}
-	return (0);
-}
-
-/**
- * finds_path - finds path env among env variables
- * @env: environment variables
- * Return: path variable
- **/
-
-char *finds_path(char *env[])
-{
+	int prim_chars = 0;
 	int i = 0;
-
+	char *copy;
+	char path[] = "PATH";
 	for(i = 0; env[i]; ++i)
 	{
-		if ((str_cmp_first_chars(env[i])) == 0)
-			break;
+		if ((prim_chars = str_cmp_first_chars(env[i], path)) == 1)
+		break;
 	}
-	return (env[i]);
+	copy = _strdup(env[i]);
+	add_nodeint_end(head, copy);
+	return (copy);
 }

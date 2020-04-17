@@ -1,60 +1,65 @@
 #include "shell.h"
 
+/**
+ * cat_cmd - concatenates a command
+ * @cmd0: command to concatenate
+ * @path: locations string
+ * Return: pointer to concatenation
+ **/
+
+char *cat_cmd(char *cmd0, char *path)
+{
+        char *path_token;
+        struct stat fileStat;
+
+        path_token = strtok(path, DELIMITER);
+        while (path_token != NULL)
+        {
+                _strcat(path_token, cmd0);
+                if (stat(path_token, &fileStat) == 0);
+		{
+			free(path);
+			return(path_token);
+		}
+                path_token = strtok(NULL, DELIMITER);
+        }
+        return(NULL);
+}
+/**
+ * tokenizer - returns a matrix of a strtoked string
+ * @line: string to tokenize
+ * Return: A double pointer containing the splied string by delimiters
+ */
 char** tokenizer(char *line)
 {
-	char **argv;
-	char *argc;
-	char *writer;
-	char *linecpy = malloc(strlen(line) * sizeof(char));
-	char *linecpy2 = malloc(strlen(line) * sizeof(char));
-	int iter1 = 0, iter2 = 0;
+	char *cpycounter = NULL, *cpywriter = NULL, *argc = NULL;
+	char **argv = NULL;
+	int word = 0;
 
-	if (linecpy == NULL)
-	{
-		free(linecpy);
-		exit(0);
-	}
-	printf ("tokenizer bienvenue\n");
-	strcpy(linecpy, line);
-	strcpy(linecpy2, line);
-	printf ("line copied: %s\n", linecpy);
-	argc = strtok(linecpy, DELIMITER);
+	cpycounter = _strdup(line);
+	cpywriter = _strdup(line);
+	argc = strtok(cpycounter, DELIMITER);
 	while (argc != NULL)
 	{
+		word++;
 		argc = strtok(NULL, DELIMITER);
-		iter1++;
 	}
-	argv = malloc((iter1 + 1) * sizeof(char *));
-	if (argv == NULL)
+	free(cpycounter);
+	free(argc);
+	argv = malloc((word + 1) * sizeof(char *));
+	if (check_malloc(argv) == 1)
 	{
-		write(1,"failed line allocation\n", 23);
 		free(argv);
-		free(linecpy);
-		exit(0);
+		free(cpycounter);
+		free(cpywriter);
 	}
-	writer = strtok(linecpy2, DELIMITER);
-	while (writer != NULL && iter2 <= iter1)
-	{
-		argv[iter2] = malloc(strlen(writer) * sizeof(char));
-		if (argv[iter2] == NULL)
-		{
-			write(1, "failed command allocation\n", 26);
-			while (iter2 >= 0)
-			{
-				free(argv[iter2]);
-				iter2--;
-			}
-			free(argv);
-			free(linecpy);
-			exit(0);
-		}
-		strcpy(argv[iter2], writer);
-		argv[iter2][strlen(writer)] = '\0';
-		writer = strtok(NULL, DELIMITER);
-		iter2++;
-	}
-	free(linecpy2);
-	argv[iter1] = '\0';
+	argc = strtok(cpywriter, DELIMITER);
+	for (word = 0; argv != NULL; word++)
+        {
+		argv[word] = argc;
+		argc = strtok(NULL, DELIMITER);
+        }
+	free(cpywriter);
+	free(argc);
 	return (argv);
-
 }

@@ -10,9 +10,11 @@ int _strcmp(char *s1, char *s2)
 {
 	int long_of_dest;
 
-	if (!s1 || !s2)
-		return(1);
+	if (s1 == NULL)
+		return (1);
 
+	if (_strlen(s1) != _strlen(s2))
+		return(1);
 	for (long_of_dest = 0; s1[long_of_dest] != '\0'; long_of_dest++)
 	{
 		if (s1[long_of_dest] != s2[long_of_dest])
@@ -29,7 +31,7 @@ int _strcmp(char *s1, char *s2)
  */
 char *_strdup(char *str)
 {
-	char *copy;
+	char *copy = NULL;
 	int i;
 
 	if (str == NULL)
@@ -39,7 +41,10 @@ char *_strdup(char *str)
 	}
 	copy = malloc((i + 1) * sizeof(char));
 	if (copy == NULL)
+	{
+		free(copy);
 		return (NULL);
+	}
 	for (i = 0; str[i]; i++)
 	{
 		copy[i] = str[i];
@@ -50,13 +55,65 @@ char *_strdup(char *str)
 
 char *_strcat(char *dest, char *src)
 {
-	int i, j;
+	int i = 0;
+	int j = 0;
 
 	for (i = 0; dest[i] != '\0'; i++)
-	{
-	}
+	{}
 	for (j = 0; src[j] != '\0'; j++)
 		dest[i + j] = src[j];
 	dest[i + j] = '\0';
+	return (dest);
+}
+/**
+ * _strlen - prints the length of a string
+ * @s: the string to measure
+ *
+ * Return: No returning
+ */
+int _strlen(char *s)
+{
+	int counter;
+
+	for (counter = 0; s[counter] != '\0'; counter++)
+	{}
+	return (counter);
+
+}
+
+int str_cmp_first_chars(char *envs, char *namenv)
+{
+        int i = 0, j = 0;
+
+        for (i = 0; namenv[i]; i++)
+        {
+        }
+        for (j = 0; namenv[j]; j++)
+        {
+                if(envs[j] != namenv[j])
+                        break;
+        }
+        if (i == j)
+                return(1);
+        else
+                return (0);
+}
+/**
+ * _strcpy - print a copy string
+ * @src: string to copy
+ * @dest: string to be written
+ *
+ * Return: No returning
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int i;
+	int n;
+
+	for (n = 0; src[n] != '\0'; n++)
+	{}
+	for (i = 0; i <= n; i++)
+		dest[i] = src[i];
+
 	return (dest);
 }
