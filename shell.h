@@ -41,5 +41,6 @@ char *path_finder(char *env[], garbage **head);
 int str_cmp_first_chars(char *envs, char *namenv);
 char *cat_cmd(char *cmd0, char **dirs, garbage **head);
 char *_strcpy(char *dest, char *src);
+int is_address(char *cmd0);
 
 #endif

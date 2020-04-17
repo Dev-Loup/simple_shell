@@ -13,8 +13,10 @@ int main(int ac, char **av, char **env)
 	char *line = NULL, *path = NULL, **cmd = NULL, *location = NULL;
 	size_t size = IP_SIZE;
 	ssize_t fd_line = 0;
-	garbage *headcmd = NULL, *headpath = NULL, *headloc = NULL, *headirs = NULL;
+	garbage *head = NULL;
 	char **dirs = NULL;
+	pid_t pid = 0;
+	int chk_adr = 0;
 
 	if(ac != 1 || av == NULL || env == NULL)
 		exit(127);
@@ -27,21 +29,35 @@ int main(int ac, char **av, char **env)
 		printf("line:%s", line);
 		if (fd_line == -1)
 			continue;
-		cmd = tokenizer(line, &headcmd);
+		cmd = tokenizer(line, &head);
 		printf("cmd tokenized\n");
-		path = path_finder(env, &headpath);
-		printf("path found\n");
-		dirs = tokenizer(path, &headirs);
-		printf("path tokenized\n");
-		location = cat_cmd(cmd[0], dirs, &headloc);
-		printf("loc: %s\n", location);
-		if (location == "sh")
-			continue;
+		chk_adr = is_address(cmd[0]);
+		if (chk_adr != 0)
+		{
+			path = path_finder(env, &head);
+			printf("path found\n");
+			dirs = tokenizer(path, &head);
+			printf("path tokenized\n");
+			location = cat_cmd(cmd[0], dirs, &head);
+			printf("loc: %s\n", location);
+			if (location == "sh")
+				continue;
+			if (location == NULL && (_strcmp(DELIMITER, line) == 0))
+				continue;
+		}
+		else
+			location = cmd[0];
+		if (location != NULL)
+		{
+			pid = fork();
+			if (pid == 0)
+			{
+				execve(location, cmd, env);
+			}
+			wait(NULL);
+		}
 	}
-	free_list(headcmd, 0);
-	free_list(headpath, 0);
-	free_list(headirs, 0);
-	free_list(headloc, 0);
+	free_list(head, 0);
 	free(line);
 	return (0);
 }

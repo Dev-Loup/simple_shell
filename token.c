@@ -14,7 +14,7 @@ char *cat_cmd(char *cmd0, char **dirs, garbage **head)
 	int i = 1;
 	struct stat fileStat;
 
-	if (cmd0 == NULL || (cmd0[0] == '.' && cmd0[1] == '\0'))
+	if (cmd0 == NULL || (_strcmp(cmd0, ".") == 0))
 		return("sh");
 	str = malloc(256 * sizeof(char));
 	add_nodeint_end(head, str);
