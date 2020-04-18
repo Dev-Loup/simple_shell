@@ -10,11 +10,10 @@ int _strcmp(char *s1, char *s2)
 {
 	int long_of_dest;
 
-	if (s1 == NULL)
+	if (s1 == NULL || s2 == NULL)
 		return (1);
-
 	if (_strlen(s1) != _strlen(s2))
-		return(1);
+		return (1);
 	for (long_of_dest = 0; s1[long_of_dest] != '\0'; long_of_dest++)
 	{
 		if (s1[long_of_dest] != s2[long_of_dest])
@@ -52,7 +51,12 @@ char *_strdup(char *str)
 	copy[i] = '\0';
 	return (copy);
 }
-
+/**
+ * _strcat - concatenates 2 strings
+ * @dest: destination f the concatenation
+ * @src: source of what will be concatenated
+ * Return: The destination string concatenated
+ */
 char *_strcat(char *dest, char *src)
 {
 	int i = 0;
@@ -78,42 +82,27 @@ int _strlen(char *s)
 	for (counter = 0; s[counter] != '\0'; counter++)
 	{}
 	return (counter);
-
-}
-
-int str_cmp_first_chars(char *envs, char *namenv)
-{
-        int i = 0, j = 0;
-
-        for (i = 0; namenv[i]; i++)
-        {
-        }
-        for (j = 0; namenv[j]; j++)
-        {
-                if(envs[j] != namenv[j])
-                        break;
-        }
-        if (i == j)
-                return(1);
-        else
-                return (0);
 }
 /**
- * _strcpy - print a copy string
- * @src: string to copy
- * @dest: string to be written
- *
- * Return: No returning
+ * str_cmp_first_chars - compares the first charactes of a string with another
+ * @envs: long string
+ * @namenv: short string
+ * Return: 1 if they are equal in their first chars, 0 if they are not
  */
-char *_strcpy(char *dest, char *src)
+int str_cmp_first_chars(char *envs, char *namenv)
 {
-	int i;
-	int n;
+	int i = 0, j = 0;
 
-	for (n = 0; src[n] != '\0'; n++)
-	{}
-	for (i = 0; i <= n; i++)
-		dest[i] = src[i];
-
-	return (dest);
+	for (i = 0; namenv[i]; i++)
+	{
+	}
+	for (j = 0; namenv[j]; j++)
+	{
+		if (envs[j] != namenv[j])
+			break;
+	}
+	if (i == j)
+		return (1);
+	else
+		return (0);
 }

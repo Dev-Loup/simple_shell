@@ -1,47 +1,60 @@
 #include "shell.h"
-
+/**
+ * sig_handler - handles de Cntrl+C signal
+ * @n: non used
+ **/
+void sig_handler (int __attribute__((unused)) n)
+{
+	write(STDOUT_FILENO, "\n$>", 4);
+}
 /**
  * main - liteshell command interpreter
- * @ac: argument counter
- * @av: argument vector
- * @env: environment variables
+ * @c: argument counter
+ * @argv: argument vector
+ * @e: environment variables
  * Return: 0 on success, 1 if it fails
  **/
 
-int main(int ac, char **av, char **env)
+int main(int __attribute__((unused)) c, char **argv, char **e)
 {
-	char *line = NULL, *path = NULL, **cmd = NULL, *location = NULL;
+	char *line = NULL, *pat = NULL, **cm = NULL, *loc = NULL, **dirs = NULL;
 	size_t size = IP_SIZE;
 	ssize_t fd_line = 0;
-	garbage *headcmd = NULL, *headpath = NULL, *headloc = NULL, *headirs = NULL;
-	char **dirs = NULL;
+	garbage *h = NULL;
+	pid_t pid = 0;
+	int chk_adr = 0, cmd_counter = 0;
 
-	if(ac != 1 || av == NULL || env == NULL)
-		exit(127);
+	signal(SIGINT, sig_handler);
 	while (_strcmp(line, SH_KILLER) != 0)
 	{
-		write(STDOUT_FILENO, "$>", 2);
-		fd_line = getline(&line, &size, stdin);
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "$>", 3);
+		fd_line = getline(&line, &size, stdin), cmd_counter++;
 		if (check_malloc(line) == 1)
 			continue;
-		printf("line:%s", line);
 		if (fd_line == -1)
-			continue;
-		cmd = tokenizer(line, &headcmd);
-		printf("cmd tokenized\n");
-		path = path_finder(env, &headpath);
-		printf("path found\n");
-		dirs = tokenizer(path, &headirs);
-		printf("path tokenized\n");
-		location = cat_cmd(cmd[0], dirs, &headloc);
-		printf("loc: %s\n", location);
-		if (location == "sh")
-			continue;
+			free_list(h), free(line), exit(0);
+		cm = tokenizer(line, &h), chk_adr = is_address(cm[0]);
+		if (chk_adr != 0)
+		{
+			pat = path_finder(e, &h), dirs = tokenizer(pat, &h);
+			loc = cat_cmd(cm[0], dirs, &h);
+			if (_strcmp(loc, "sh") == 0)
+				continue;
+			if (loc == NULL && (_strcmp(SH_KILLER, line) == 0))
+				continue;
+		}
+		else
+			loc = cm[0];
+		if (loc != NULL)
+		{
+			pid = fork(), wait(NULL);
+			if (pid == 0)
+				execve(loc, cm, e), exit(0);
+		}
+		else
+			not_found(argv[0], cm[0], cmd_counter, &h);
 	}
-	free_list(headcmd, 0);
-	free_list(headpath, 0);
-	free_list(headirs, 0);
-	free_list(headloc, 0);
-	free(line);
+	free_list(h), free(line);
 	return (0);
 }

@@ -3,7 +3,7 @@
 /**
  * add_nodeint_end - adds a new node at the end of a listint_t list.
  * @head: double pointer to the head of the list
- * @mugre: number to add
+ * @trash: number to add
  * Return: the address of the new element, or NULL if it failed
  */
 garbage *add_nodeint_end(garbage **head, void *trash)
@@ -52,7 +52,7 @@ void print_listint(garbage *h)
  * free_list -function that frees a list_t list.
  * @head: head of the list
  */
-void free_list(garbage *head, int retorno)
+void free_list(garbage *head)
 {
 	garbage *copy_head;
 
@@ -63,8 +63,4 @@ void free_list(garbage *head, int retorno)
 		free(head);
 		head = copy_head;
 	}
-	if (retorno == 1)
-		return;
-	if (retorno == 2)
-		exit(0);
 }

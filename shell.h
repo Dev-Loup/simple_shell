@@ -29,7 +29,7 @@ typedef struct garbage
 } garbage;
 garbage *add_nodeint_end(garbage **head, void *trash);
 void print_listint(garbage *h);
-void free_list(garbage *head, int retorno);
+void free_list(garbage *head);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 char *_strcat(char *dest, char *src);
@@ -41,5 +41,10 @@ char *path_finder(char *env[], garbage **head);
 int str_cmp_first_chars(char *envs, char *namenv);
 char *cat_cmd(char *cmd0, char **dirs, garbage **head);
 char *_strcpy(char *dest, char *src);
+int is_address(char *cmd0);
+int _putchar(char c);
+void not_found(char *argv0, char *cmd0, int cmd_counter, garbage **head);
+void print_number(int n);
+char *return_integer(int n);
 
 #endif

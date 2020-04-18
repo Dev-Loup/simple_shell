@@ -3,7 +3,8 @@
 /**
  * cat_cmd - concatenates a command
  * @cmd0: command to concatenate
- * @path: locations string
+ * @dirs: directories
+ * @head: head of the list to malloc and to free
  * Return: pointer to concatenation
  **/
 
@@ -14,18 +15,18 @@ char *cat_cmd(char *cmd0, char **dirs, garbage **head)
 	int i = 1;
 	struct stat fileStat;
 
-	if (cmd0 == NULL || (cmd0[0] == '.' && cmd0[1] == '\0'))
-		return("sh");
+	if (cmd0 == NULL || (_strcmp(cmd0, ".") == 0))
+		return ("sh");
 	str = malloc(256 * sizeof(char));
 	add_nodeint_end(head, str);
 	if (check_malloc(str) == 1)
-		return(NULL);
+		return (NULL);
 	for (i = 1; dirs[i]; i++)
 	{
 		_strcpy(str, dirs[i]);
 		_strcat(str, slash);
 		_strcat(str, cmd0);
-		if(stat(str, &fileStat) == 0)
+		if (stat(str, &fileStat) == 0)
 		{
 			return (str);
 		}
@@ -35,6 +36,7 @@ char *cat_cmd(char *cmd0, char **dirs, garbage **head)
 /**
  * tokenizer - returns a matrix of a strtoked string
  * @line: string to tokenize
+ * @head: head of the list to malloc and to free
  * Return: A double pointer containing the splied string by delimiters
  */
 char **tokenizer(char *line, garbage **head)
@@ -52,9 +54,8 @@ char **tokenizer(char *line, garbage **head)
 	add_nodeint_end(head, linecpy2);
 	if (linecpy == NULL)
 	{
-		return(NULL);
+		return (NULL);
 	}
-	printf ("line copied: %s\n", linecpy);
 	argc = strtok(linecpy, DELIMITER);
 	while (argc != NULL)
 	{
@@ -65,8 +66,8 @@ char **tokenizer(char *line, garbage **head)
 	add_nodeint_end(head, argv);
 	if (argv == NULL)
 	{
-		write(1,"failed line allocation\n", 23);
-		return(NULL);
+		write(STDOUT_FILENO, "failed line allocation\n", 23);
+		return (NULL);
 	}
 	writer = strtok(linecpy2, DELIMITER);
 	while (writer != NULL && iter2 <= iter1)
