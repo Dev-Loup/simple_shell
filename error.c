@@ -2,7 +2,9 @@
 /**
  * not_found - sends an error message when location is nor found
  * @argv0:name of the program
- * @cmd_counter; command counter
+ * @cmd0: the first command
+ * @cmd_counter: command counter
+ * @head: head of the list
  */
 void not_found(char *argv0, char *cmd0, int cmd_counter, garbage **head)
 {

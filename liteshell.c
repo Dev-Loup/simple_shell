@@ -33,7 +33,7 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 		if (check_malloc(line) == 1)
 			continue;
 		if (fd_line == -1)
-			free_list(h, 2), free(line);
+			free_list(h), free(line), exit(0);
 		cm = tokenizer(line, &h), chk_adr = is_address(cm[0]);
 		if (chk_adr != 0)
 		{
@@ -55,6 +55,6 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 		else
 			not_found(argv[0], cm[0], cmd_counter, &h);
 	}
-	free_list(h, 0), free(line);
+	free_list(h), free(line);
 	return (0);
 }

@@ -12,9 +12,8 @@ int _strcmp(char *s1, char *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (1);
-
 	if (_strlen(s1) != _strlen(s2))
-		return(1);
+		return (1);
 	for (long_of_dest = 0; s1[long_of_dest] != '\0'; long_of_dest++)
 	{
 		if (s1[long_of_dest] != s2[long_of_dest])
@@ -52,7 +51,12 @@ char *_strdup(char *str)
 	copy[i] = '\0';
 	return (copy);
 }
-
+/**
+ * _strcat - concatenates 2 strings
+ * @dest: destination f the concatenation
+ * @src: source of what will be concatenated
+ * Return: The destination string concatenated
+ */
 char *_strcat(char *dest, char *src)
 {
 	int i = 0;
@@ -78,86 +82,27 @@ int _strlen(char *s)
 	for (counter = 0; s[counter] != '\0'; counter++)
 	{}
 	return (counter);
-
 }
-
+/**
+ * str_cmp_first_chars - compares the first charactes of a string with another
+ * @envs: long string
+ * @namenv: short string
+ * Return: 1 if they are equal in their first chars, 0 if they are not
+ */
 int str_cmp_first_chars(char *envs, char *namenv)
 {
-        int i = 0, j = 0;
+	int i = 0, j = 0;
 
-        for (i = 0; namenv[i]; i++)
-        {
-        }
-        for (j = 0; namenv[j]; j++)
-        {
-                if(envs[j] != namenv[j])
-                        break;
-        }
-        if (i == j)
-                return(1);
-        else
-                return (0);
-}
-/**
- * _strcpy - print a copy string
- * @src: string to copy
- * @dest: string to be written
- *
- * Return: No returning
- */
-char *_strcpy(char *dest, char *src)
-{
-	int i;
-	int n;
-
-	for (n = 0; src[n] != '\0'; n++)
-	{}
-	for (i = 0; i <= n; i++)
-		dest[i] = src[i];
-
-	return (dest);
-}
-
-/**
- * print_number - prints an integer
- * @n: integer to print
- *
- */
-void print_number(int n)
-{
-	int i, j, big, small, h = 1, potencia = 1;
-
-	if (n == 0)
+	for (i = 0; namenv[i]; i++)
 	{
-		_putchar(48);
 	}
-	if (n < 0)
+	for (j = 0; namenv[j]; j++)
 	{
-		_putchar('-');
-		n = n * -1;
+		if (envs[j] != namenv[j])
+			break;
 	}
-	for (i = 0; h != 0; i++)
-	{
-		h = n / potencia;
-		potencia = potencia * 10;
-	}
-	potencia = potencia / 100;
-	for (j = (i - 1); j != 0; j--)
-	{
-		big = n / potencia;
-		small = big % 10;
-		potencia = potencia / 10;
-		_putchar(small + 48);
-	}
-}
-/**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
+	if (i == j)
+		return (1);
+	else
+		return (0);
 }

@@ -29,7 +29,7 @@ typedef struct garbage
 } garbage;
 garbage *add_nodeint_end(garbage **head, void *trash);
 void print_listint(garbage *h);
-void free_list(garbage *head, int retorno);
+void free_list(garbage *head);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 char *_strcat(char *dest, char *src);

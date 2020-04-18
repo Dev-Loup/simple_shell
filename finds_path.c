@@ -7,13 +7,13 @@
  */
 char *path_finder(char *env[], garbage **head)
 {
-	int prim_chars = 0;
 	int i = 0;
 	char *copy;
 	char path[] = "PATH";
-	for(i = 0; env[i]; ++i)
+
+	for (i = 0; env[i]; ++i)
 	{
-		if ((prim_chars = str_cmp_first_chars(env[i], path)) == 1)
+		if ((str_cmp_first_chars(env[i], path)) == 1)
 		break;
 	}
 	copy = _strdup(env[i]);
@@ -28,7 +28,8 @@ char *path_finder(char *env[], garbage **head)
 int is_address(char *cmd0)
 {
 	struct stat fileStat;
-	if(stat(cmd0, &fileStat) == 0)
+
+	if (stat(cmd0, &fileStat) == 0)
 	{
 		return (0);
 	}
