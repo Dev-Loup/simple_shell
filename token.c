@@ -54,7 +54,6 @@ char **tokenizer(char *line, garbage **head)
 	{
 		return(NULL);
 	}
-	printf ("line copied: %s\n", linecpy);
 	argc = strtok(linecpy, DELIMITER);
 	while (argc != NULL)
 	{
