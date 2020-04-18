@@ -5,7 +5,7 @@
  **/
 void sig_handler (int __attribute__((unused)) n)
 {
-	write(STDOUT_FILENO, "\n$", 2);
+	write(STDOUT_FILENO, "\n$>", 4);
 }
 /**
  * main - liteshell command interpreter
@@ -28,7 +28,7 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 	while (_strcmp(line, SH_KILLER) != 0)
 	{
 		if (isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "$>", 2);
+			write(STDOUT_FILENO, "$>", 3);
 		fd_line = getline(&line, &size, stdin), cmd_counter++;
 		if (check_malloc(line) == 1)
 			continue;
