@@ -41,7 +41,7 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 			loc = cat_cmd(cm[0], dirs, &h);
 			if (_strcmp(loc, "sh") == 0)
 				continue;
-			if (loc == NULL && (_strcmp(DELIMITER, line) == 0))
+			if (loc == NULL && (_strcmp(SH_KILLER, line) == 0))
 				continue;
 		}
 		else
