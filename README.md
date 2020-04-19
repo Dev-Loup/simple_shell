@@ -43,7 +43,11 @@ SH>
 
 ## Road Map
 
-* --
+* [OK] Man page added
+* [OK] Shellite execute programs
+* [OK] Execution can handle arguments
+* [__] Handle path locations --working on :)
+* [OK] Shellite can go out with exit command
 
 ## Contributing
 Pull requests and reporting issues are always welcome, make a pull request for contacting us :)
