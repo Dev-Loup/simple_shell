@@ -1,5 +1,5 @@
 # Shellite - The simple shell
-![shellite_logo](/images/logo.png)
+![shellite_logo](/images/shellite.png)
 
 Lite Shell is a simple command interpreter that provides basic functions for interacting with the OS, pipes handling is not provided but Lite shell handles memory management for preventing memory leaks, Lite shell is not meant to be a replacement of BASH, SH or another well-supported shell since lite shell is developed for basic understanding of shell functions
 
