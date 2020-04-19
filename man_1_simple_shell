@@ -1,10 +1,12 @@
 .TH Shellite 1 "17-04-2020 C" "version 1.0" "Linux edition"
+
 .SH NAME
+
 .B Shellite - a Tiny Shell
 
 .SH SYNOPSIS
 
-.B Shellite
+.B $>shellite
 
 .SH DESCRIPTION
 
@@ -16,13 +18,16 @@ Shellite does not get any arguments
 
 .SH INVOCATION
 
-Shellite does not have any log system.
+* Shellite does not have any log system.
 
-Interactive mode is available using the following input commands:
-.B "SH stands for shell command interpreter that comes with linux" 
+* Interactive mode is available using the following input commands:
+
+SH stands for shell command interpreter that comes with linux
 
 SH> liteshell
+.br
 lsh> echo "input"
+.br
 lsh> "input"
 
 for going out:
@@ -30,29 +35,31 @@ for going out:
 lsh> exit
 SH>
 
-while non interactive mode is executed following these commands:
+* While non interactive mode is executed following these commands:
 
 SH> echo "input" | liteshell
+.br
 SH> "input"
 
 Automatic exit is performed in non interactive mode
 
-When .B Shellite is invoked as interactive program it gets the environment variables for further use and waits for command input, after getting a command shellite executes the first word of input if it's possible.
+When Shellite is invoked as interactive program it gets the environment variables for further use and waits for command input, after getting a command shellite executes the first word of input if it's possible.
 
 .SH Definitions
-.B blank
 
+.B Blank
+.br
 A space or tab
 
-.B word
-
+.B Word
+.br
 Also known as tokens they are single definitions strings composed by characters not specified as delimiters
 
-.B delimiters
-
+.B Delimiters
+.br
 Special characters to delimite tokens generations, a delimiter never will be in a token.
 
-.B "<space>" " "<space tab> <newline> ="
+.B ***<space> """ <space tab> <newline> =
 
 
 .SH Prompting
