@@ -22,7 +22,7 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 	ssize_t fd_line = 0;
 	garbage *h = NULL;
 	pid_t pid = 0;
-	int chk_adr = 0, cmd_counter = 0;
+	int chk_adr = 0, cmd_counter = 0, stat = 0;
 
 	signal(SIGINT, sig_handler);
 	while (_strcmp(line, SH_KILLER) != 0)
@@ -33,7 +33,7 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 		if (check_malloc(line) == 1)
 			continue;
 		if (fd_line == -1)
-			free_list(h), free(line), exit(0);
+			free_list(h), free(line), exit(stat);
 		cm = tokenizer(line, &h), chk_adr = is_address(cm[0]);
 		if (chk_adr != 0)
 		{
@@ -48,13 +48,13 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 			loc = cm[0];
 		if (loc != NULL)
 		{
-			pid = fork(), wait(NULL);
+			pid = fork(), wait(&stat);
 			if (pid == 0)
 				execve(loc, cm, e), exit(0);
 		}
 		else
-			not_found(argv[0], cm[0], cmd_counter, &h);
+			not_found(argv[0], cm[0], cmd_counter, &h), stat = 127;
 	}
 	free_list(h), free(line);
-	return (0);
+	exit(stat);
 }
