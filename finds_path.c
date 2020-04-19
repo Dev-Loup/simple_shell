@@ -29,6 +29,8 @@ int is_address(char *cmd0)
 {
 	struct stat fileStat;
 
+	if (_strcmp(cmd0, ".") == 0)
+		return (-1);
 	if (cmd0 == NULL)
 		return (-1);
 	if (stat(cmd0, &fileStat) == 0)
