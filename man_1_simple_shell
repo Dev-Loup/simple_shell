@@ -1,0 +1,92 @@
+.TH Shellite 1 "17-04-2020 C" "version 1.0" "Linux edition"
+
+.SH NAME
+
+.B Shellite - a Tiny Shell
+
+.SH SYNOPSIS
+
+.B $>shellite
+
+.SH DESCRIPTION
+
+.B Shellite is a simple command interpreter that provides basic functions for interacting with the OS, pipes handling is not provided but Lite shell handles memory management for preventing memory leaks, Lite shell is not meant to be a replacement of BASH, SH or another well-supported shell since lite shell is developed for basic understanding of shell functions
+
+.SH ARGUMENTS
+
+Shellite does not get any arguments
+
+.SH INVOCATION
+
+* Shellite does not have any log system.
+
+* Interactive mode is available using the following input commands:
+
+SH stands for shell command interpreter that comes with linux
+
+SH> liteshell
+.br
+lsh> echo "input"
+.br
+lsh> "input"
+
+for going out:
+
+lsh> exit
+SH>
+
+* While non interactive mode is executed following these commands:
+
+SH> echo "input" | liteshell
+.br
+SH> "input"
+
+Automatic exit is performed in non interactive mode
+
+When Shellite is invoked as interactive program it gets the environment variables for further use and waits for command input, after getting a command shellite executes the first word of input if it's possible.
+
+.SH Definitions
+
+.B Blank
+.br
+A space or tab
+
+.B Word
+.br
+Also known as tokens they are single definitions strings composed by characters not specified as delimiters
+
+.B Delimiters
+.br
+Special characters to delimite tokens generations, a delimiter never will be in a token.
+
+.B ***<space> """ <space tab> <newline> =
+
+
+.SH Prompting
+
+When .B shellite is ready to receive commands prompt .B "$>" is printed and you will be ready to send instructions
+
+.SH Reading
+
+After getting an input, the input is parsed to tokenizer for converting in tokens
+
+.SH Executing
+
+.B Shellite tries to use tokens as an address to execute a program if it fails the first token is sent to command recognisition if the command is found the command is executed otherwise command not found is returned to standard output
+
+.SH Exit command
+
+.B when exit word is sent as input .B shellite ends execution and free all the memory allocated
+
+.SH Known Issues
+
+Shellite performs multiple taskes at once and it depends on malloc function, unexpected exit could happen if malloc fails
+Shellite does not perform advanced taskes such as pipes handling and expansions
+
+.SH BUGS
+
+Shellite goes bigger with usage making bigger the memory consumed in system
+
+.SH AUTHOR
+
+Angie Castaño Alvarez and Diego Romero Ribero
