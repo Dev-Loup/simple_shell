@@ -29,5 +29,5 @@ void not_found(char *argv0, char *cmd0, int cmd_counter, garbage **head)
 void null_env(void)
 {
 	if (*environ == NULL)
-		exit(0);
+		*environ = getcwd(NULL, 0);
 }
