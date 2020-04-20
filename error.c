@@ -22,3 +22,12 @@ void not_found(char *argv0, char *cmd0, int cmd_counter, garbage **head)
 	_strcat(str, ": not found\n");
 	write(STDOUT_FILENO, str, _strlen(str));
 }
+/**
+ * null_env - checks if the environ == NULL
+ *
+ */
+void null_env(void)
+{
+	if (*environ == NULL)
+		exit(0);
+}

@@ -46,5 +46,6 @@ int _putchar(char c);
 void not_found(char *argv0, char *cmd0, int cmd_counter, garbage **head);
 void print_number(int n);
 char *return_integer(int n);
+void null_env(void);
 
 #endif

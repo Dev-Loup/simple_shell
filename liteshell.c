@@ -22,7 +22,7 @@ int main(int __attribute__((unused)) c, char **argv)
 	pid_t pid = 0;
 	int chk_adr = 0, cmd_counter = 0, stat = 0;
 
-	signal(SIGINT, sig_handler);
+	signal(SIGINT, sig_handler), null_env();
 	while (_strcmp(line, SH_KILLER) != 0)
 	{
 		if (isatty(STDIN_FILENO) == 1)
