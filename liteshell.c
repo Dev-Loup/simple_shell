@@ -11,11 +11,9 @@ void sig_handler (int __attribute__((unused)) n)
  * main - liteshell command interpreter
  * @c: argument counter
  * @argv: argument vector
- * @e: environment variables
  * Return: 0 on success, 1 if it fails
  **/
-
-int main(int __attribute__((unused)) c, char **argv, char **e)
+int main(int __attribute__((unused)) c, char **argv)
 {
 	char *line = NULL, *pat = NULL, **cm = NULL, *loc = NULL, **dirs = NULL;
 	size_t size = IP_SIZE;
@@ -37,7 +35,7 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 		cm = tokenizer(line, &h), chk_adr = is_address(cm[0]);
 		if (chk_adr != 0)
 		{
-			pat = path_finder(e, &h), dirs = tokenizer(pat, &h);
+			pat = path_finder(environ, &h), dirs = tokenizer(pat, &h);
 			loc = cat_cmd(cm[0], dirs, &h);
 			if (_strcmp(loc, "sh") == 0)
 				continue;
@@ -50,7 +48,7 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 		{
 			pid = fork(), wait(&stat), stat = WEXITSTATUS(stat);
 			if (pid == 0)
-				execve(loc, cm, e), exit(0);
+				execve(loc, cm, environ), exit(0);
 		}
 		else
 			not_found(argv[0], cm[0], cmd_counter, &h), stat = 127;

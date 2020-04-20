@@ -16,7 +16,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-
+extern char **environ;
 /**
  * struct garbage - recieves address to free
  * @trash: pointer to malloc
