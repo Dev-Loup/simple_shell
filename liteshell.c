@@ -48,7 +48,7 @@ int main(int __attribute__((unused)) c, char **argv, char **e)
 			loc = cm[0];
 		if (loc != NULL)
 		{
-			pid = fork(), wait(&stat);
+			pid = fork(), wait(&stat), stat = WEXITSTATUS(stat);
 			if (pid == 0)
 				execve(loc, cm, e), exit(0);
 		}
