@@ -44,8 +44,7 @@ jobs:
     #    uses a compiled language
 
     - run: 
-        gcc *.c -o shellite.c
-        ./shellite.c
+        gcc -Wall -Werror -Wextra -pedantic *.c -o hsh && ./hsh
     #   make bootstrap
     #   make release
 
